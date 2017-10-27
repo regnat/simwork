@@ -8,6 +8,10 @@ let gfortran-lib = p.gcc5.cc.override {
     langC = false;
     profiledCompiler = false;
   };
+  jvmlibdir =
+    if stdenv.isLinux
+    then "${openjdk}/lib/openjdk/jre/lib/amd64/server"
+    else "${openjdk}/jre/lib/server";
 in
   p.haskell.lib.buildStackProject {
     inherit ghc;
@@ -19,4 +23,7 @@ in
       p.ghostscript
       p.openjdk p.gradle p.spark p.zlib p.zip
     ];
+    extraArgs = ["--extra-lib-dirs=${jvmlibdir}"];
+    LD_LIBRARY_PATH = [jvmlibdir];
+    hardeningDisable = [ "bindnow" ];
   }
