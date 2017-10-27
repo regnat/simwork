@@ -9,9 +9,9 @@ let gfortran-lib = p.gcc5.cc.override {
     profiledCompiler = false;
   };
   jvmlibdir =
-    if stdenv.isLinux
-    then "${openjdk}/lib/openjdk/jre/lib/amd64/server"
-    else "${openjdk}/jre/lib/server";
+    if p.stdenv.isLinux
+    then "${p.openjdk}/lib/openjdk/jre/lib/amd64/server"
+    else "${p.openjdk}/jre/lib/server";
 in
   p.haskell.lib.buildStackProject {
     inherit ghc;
