@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> {}
+{ nixpkgs ? import (fetchTarball "https://github.com/nixos/nixpkgs/archive/e91840cfb6b7778f8c29d455a2f24cffa1b4e43e.tar.gz") {}
 , ghc ? nixpkgs.haskell.compiler.ghc802 }:
 let p = nixpkgs; in
 let gfortran-lib = p.gcc5.cc.override {
